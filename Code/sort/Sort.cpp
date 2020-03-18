@@ -5,6 +5,8 @@ using namespace std;
 class SortExample
 {
 protected:
+	int* p;
+
 	bool less(int v, int w)
 	{
 		return v < w;
@@ -21,14 +23,20 @@ public:
 	
 	void Run(int a[],int length)
 	{
-		int *p = sort(a, length);
+		p = new int[length];
+		for (int index = 0; index < length; index++)
+		{
+			p[index] = a[index];
+		}
+
+		sort(p, length);
 		for (int index = 0; index < length; index++)
 		{
 			cout << p[index] << " " << endl;
 		}
 	}
 
-	virtual int* sort(int* a, int length) = 0;
+	virtual void sort(int* a, int length) = 0;
 
 	bool isSorted(int a[],int length)
 	{
@@ -47,9 +55,8 @@ public:
 class SelectionSort :public SortExample
 {
 public:
-	int* sort(int* a, int length)
+	void sort(int* a, int length)
 	{
-		int* p = a;
 		for (int index = 0; index < length; index++)
 		{
 			int min = index;
@@ -62,6 +69,21 @@ public:
 			}
 			exch(p, index, min);
 		}
-		return p;
+	}
+};
+
+//²åÈëÅÅÐò
+class InsertionSort :public SortExample
+{
+public: 
+	void sort(int* a, int length)
+	{
+		for (int index = 1; index < length; index++)
+		{
+			for (int j = index; j > 0 && less(a[j], a[j - 1]); j--)
+			{
+				exch(a, j, j - 1);
+			}
+		}
 	}
 };

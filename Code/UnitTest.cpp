@@ -16,7 +16,7 @@ public:
 private:
 	void __UnionFind()
 	{
-		cout << "---------------  UnionFind ---------------" << endl;
+		cout << "/*---------------  UnionFind ---------------*/" << endl;
 
 		int args[] = { 4,3,3,8,6,5,9,4,2,1,5,0,7,2,6,1,1,0,6,7 };
 		int N = sizeof(args) / sizeof(int);
@@ -29,7 +29,7 @@ private:
 		};
 		string title[] = { "QuickFind" ,"QuickUnion" "UnionFind" };
 
-		int testCount = 3;
+		int testCount = sizeof(title) / sizeof(string);
 
 		for (int index = 0; index < testCount; index++)
 		{
@@ -40,19 +40,19 @@ private:
 
 	void __Sort() 
 	{
-		cout << "---------------  Sort ---------------" << endl;
-
+		cout << "/*---------------  Sort ---------------*/" << endl;
 
 		int args[] = { 4,30,3,28,65,25,49,34,22,1,5,30,7,24,36,10,21,70,66,27 };
 		int N = sizeof(args) / sizeof(int);
 
-		SortExample* ps[] =
+		SortExample* ps[] = 
 		{
 			new SelectionSort(),
+			new InsertionSort(),
 		};
-		string title[] = { "SelectionSort" };
+		string title[] = { "SelectionSort" ,"InsertionSort"};
 
-		int testCount = 1;
+		int testCount = sizeof(title)/sizeof(string);
 
 		for (int index = 0; index < testCount; index++)
 		{
