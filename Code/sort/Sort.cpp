@@ -1,4 +1,5 @@
 #include <iostream>
+#include <ctime>
 using namespace std;
 
 
@@ -29,11 +30,24 @@ public:
 			p[index] = a[index];
 		}
 
+		clock_t time_start = clock();
 		sort(p, length);
-		for (int index = 0; index < length; index++)
+		clock_t time_end = clock();
+		cout << "time use:" << 1000 * (time_end - time_start) / (double)CLOCKS_PER_SEC << "ms" << endl;
+
+		if (length <= 100)
 		{
-			cout << p[index] << " " << endl;
+			for (int index = 0; index < length; index++)
+			{
+				cout << p[index] << " ";
+				if ((index + 1) % 100 == 0)
+				{
+					cout << endl;
+				}
+			}
 		}
+
+		cout << endl;
 	}
 
 	virtual void sort(int* a, int length) = 0;
@@ -84,6 +98,31 @@ public:
 			{
 				exch(a, j, j - 1);
 			}
+		}
+	}
+};
+
+//Ï£¶ûÅÅÐò
+class ShellSort :public SortExample
+{
+public:
+	void sort(int* a, int length)
+	{
+		int h = 1;
+		int group = 5;
+		while (h < length / group) {
+			h = group * h + 1;
+		}
+		while (h >= 1)
+		{
+			for (int index = h; index < length; index++)
+			{
+				for (int j = index; j >= h && less(a[j], a[j - h]); j -= h)
+				{
+					exch(a, j, j - h);
+				}
+			}
+			h = h / group;
 		}
 	}
 };

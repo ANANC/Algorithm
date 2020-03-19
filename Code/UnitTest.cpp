@@ -36,21 +36,29 @@ private:
 			cout << title[index] << endl;
 			ps[index]->Run(args);
 		}
+
+		delete(ps);
 	}
 
 	void __Sort() 
 	{
 		cout << "/*---------------  Sort ---------------*/" << endl;
 
-		int args[] = { 4,30,3,28,65,25,49,34,22,1,5,30,7,24,36,10,21,70,66,27 };
-		int N = sizeof(args) / sizeof(int);
+		int N = 50;
+		int* args = new int[N];
+		for (int index = 0; index < N; index++)
+		{
+			srand(index * time(0));
+			args[index] = rand();
+		}
 
-		SortExample* ps[] = 
+		SortExample* ps[] =
 		{
 			new SelectionSort(),
 			new InsertionSort(),
+			new ShellSort()
 		};
-		string title[] = { "SelectionSort" ,"InsertionSort"};
+		string title[] = { "SelectionSort" ,"InsertionSort","ShellSort"};
 
 		int testCount = sizeof(title)/sizeof(string);
 
@@ -58,7 +66,9 @@ private:
 		{
 			cout << title[index] << endl;
 			ps[index]->Run(args, N);
+			cout << endl;
 		}
+
 
 	}
 }; 
