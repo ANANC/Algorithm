@@ -1,5 +1,6 @@
 #include "union-find/UnionFind.cpp"
 #include "sort/Sort.cpp"
+#include "merge/Merge.cpp"
 
 #include <iostream>
 using namespace std;
@@ -10,7 +11,8 @@ public:
 	void Start() 
 	{
 		//__UnionFind();// 并查集
-		__Sort();//排序
+		//__Sort();//常见排序
+		__Megre();//递归排序
 	}
 
 private:
@@ -42,7 +44,7 @@ private:
 
 	void __Sort() 
 	{
-		cout << "/*---------------  Sort ---------------*/" << endl;
+		cout << "/*---------------  Sort  ---------------*/" << endl;
 
 		int N = 50;
 		int* args = new int[N];
@@ -69,6 +71,33 @@ private:
 			cout << endl;
 		}
 
+	}
 
+	void __Megre()
+	{
+		cout << "/*---------------  Merge  ---------------*/" << endl;
+
+		int N = 10;
+		int* args = new int[N];
+		for (int index = 0; index < N; index++)
+		{
+			srand(index * time(0));
+			args[index] = rand();
+		}
+
+		Merge* ps[] =
+		{
+			new TopDownMerge(),
+		};
+		string title[] = { "Merge"  };
+
+		int testCount = sizeof(title) / sizeof(string);
+
+		for (int index = 0; index < testCount; index++)
+		{
+			cout << title[index] << endl;
+			ps[index]->Run(args, N);
+			cout << endl;
+		}
 	}
 }; 
