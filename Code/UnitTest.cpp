@@ -88,8 +88,9 @@ private:
 		Merge* ps[] =
 		{
 			new TopDownMerge(),
+			new BottmUpMerge(),
 		};
-		string title[] = { "Merge"  };
+		string title[] = { "TopDownMerge"  ,"BottmUpMerge"};
 
 		int testCount = sizeof(title) / sizeof(string);
 

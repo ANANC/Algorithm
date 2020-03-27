@@ -1,5 +1,6 @@
 #include <iostream>
 #include <ctime>
+#include<algorithm>
 using namespace std;
 
 class Merge
@@ -46,7 +47,7 @@ protected:
 	virtual void sort(int* a, int low, int height) = 0;
 
 public:
-	void Run(int a[], int length)
+	virtual void Run(int a[], int length)
 	{
 		p = new int[length];
 		for (int index = 0; index < length; index++)
@@ -91,5 +92,52 @@ protected:
 		sort(a, low, mid);
 		sort(a, mid + 1, height);
 		merge(a, low, mid, height);
+	}
+};
+
+class BottmUpMerge : public Merge
+{
+protected:
+	void sort(int* a, int length)
+	{
+		for (int sz = 1; sz < length; sz = sz + sz)
+		{
+			for (int low = 0; low < length - sz; low += sz + sz)
+			{
+				merge(a, low, low + sz - 1, min(low + sz + sz - 1, length - 1));
+			}
+		}
+	}
+	void sort(int* a, int low, int height) {}
+
+public :
+	virtual void Run(int a[], int length)
+	{
+		p = new int[length];
+		for (int index = 0; index < length; index++)
+		{
+			p[index] = a[index];
+		}
+
+		aux = new int[length];
+
+		clock_t time_start = clock();
+		sort(p, length);
+		clock_t time_end = clock();
+		cout << "time use:" << 1000 * (time_end - time_start) / (double)CLOCKS_PER_SEC << "ms" << endl;
+
+		if (length <= 100)
+		{
+			for (int index = 0; index < length; index++)
+			{
+				cout << p[index] << " ";
+				if ((index + 1) % 100 == 0)
+				{
+					cout << endl;
+				}
+			}
+		}
+
+		cout << endl;
 	}
 };
