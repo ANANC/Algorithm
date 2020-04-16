@@ -77,7 +77,7 @@ private:
 	{
 		cout << "/*---------------  Merge  ---------------*/" << endl;
 
-		int N = 10;
+		int N = 5;
 		int* args = new int[N];
 		for (int index = 0; index < N; index++)
 		{

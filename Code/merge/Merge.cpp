@@ -16,6 +16,7 @@ protected:
 
 	void merge(int a[], int low, int mid, int height)
 	{
+		cout << "merge low:" << low << " mid:" << mid << " height:" << height << endl;
 		int index = low;
 		int j = mid + 1;
 
@@ -44,7 +45,7 @@ protected:
 		}
 	}
 
-	virtual void sort(int* a, int low, int height) = 0;
+	virtual void sort(int* a, int low, int height, string title = "") = 0;
 
 public:
 	virtual void Run(int a[], int length)
@@ -81,16 +82,20 @@ public:
 class TopDownMerge :public Merge
 {
 protected:
-	void sort(int* a, int low, int height)
+	void sort(int* a, int low, int height,string title="")
 	{
+		cout << title << "sort low:" << low << " height:" << height << endl;
+
 		if (height <= low)
 		{
 			return;
 		}
 
-		int mid = low + (height - low) / 2;
-		sort(a, low, mid);
-		sort(a, mid + 1, height);
+		int mid = low + (height - low) / 2;		
+		cout << title <<"sort low:" << low << " mid:" << mid << " height:" << height << endl;
+
+		sort(a, low, mid, title+" ");
+		sort(a, mid + 1, height, title + " ");
 		merge(a, low, mid, height);
 	}
 };
@@ -104,11 +109,16 @@ protected:
 		{
 			for (int low = 0; low < length - sz; low += sz + sz)
 			{
-				merge(a, low, low + sz - 1, min(low + sz + sz - 1, length - 1));
+				int mid = low + sz - 1;
+				int curLength = min(low + sz + sz - 1, length - 1);
+
+				cout << "sort low:" << low << " mid:" << mid << " height:" << curLength <<" sz£º"<< sz << endl;
+
+				merge(a, low, mid, curLength);
 			}
 		}
 	}
-	void sort(int* a, int low, int height) {}
+	void sort(int* a, int low, int height, string title = "") {}
 
 public :
 	virtual void Run(int a[], int length)
