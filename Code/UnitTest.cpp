@@ -1,6 +1,7 @@
 #include "union-find/UnionFind.cpp"
 #include "sort/Sort.cpp"
 #include "merge/Merge.cpp"
+#include "priority-queue/PriorityQueue.cpp"
 
 #include <iostream>
 using namespace std;
@@ -91,6 +92,33 @@ private:
 			new BottmUpMerge(),
 		};
 		string title[] = { "TopDownMerge"  ,"BottmUpMerge"};
+
+		int testCount = sizeof(title) / sizeof(string);
+
+		for (int index = 0; index < testCount; index++)
+		{
+			cout << title[index] << endl;
+			ps[index]->Run(args, N);
+			cout << endl;
+		}
+	}
+
+	void __PriortyQueue()
+	{
+		cout << "/*---------------  PriortyQueue  ---------------*/" << endl;
+
+		int N = 5;
+		int* args = new int[N];
+		for (int index = 0; index < N; index++)
+		{
+			srand(index * time(0));
+			args[index] = rand();
+		}
+
+		PriorityQueue* ps[] =
+		{
+		};
+		string title[] = {  };
 
 		int testCount = sizeof(title) / sizeof(string);
 
