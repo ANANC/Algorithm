@@ -13,7 +13,8 @@ public:
 	{
 		//__UnionFind();// 并查集
 		//__Sort();//常见排序
-		__Megre();//递归排序
+		//__Megre();//递归排序
+		__PriortyQueue();//优先队列
 	}
 
 private:
@@ -116,16 +117,17 @@ private:
 		}
 
 		PriorityQueue* ps[] =
-		{
+		{ 
+			new HeapPriorityQueue(),
 		};
-		string title[] = {  };
+		string title[] = { "HeapPriorityQueue" };
 
 		int testCount = sizeof(title) / sizeof(string);
 
 		for (int index = 0; index < testCount; index++)
 		{
 			cout << title[index] << endl;
-			ps[index]->Run(args, N);
+			ps[index]->Run(args, N, N - 1);
 			cout << endl;
 		}
 	}
