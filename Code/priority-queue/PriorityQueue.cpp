@@ -6,33 +6,35 @@ class  PriorityQueue
 {
 public:
 	int* p;
-	int arrayLength;
+	int arrayLength = 0;
 
 public :
 	void Run(int a[], int length, int TopCount)
 	{
-		arrayLength = length;
-
-		cout << "intput:------------------------ \n";
-		p = new int[length];
+		p = new int[length+1];
 		for (int index = 0; index < length; index++)
 		{
 			int curValue = a[index];
 
-			cout << curValue << " ";
-
-			p[index] = a[index];
+			insert(curValue);
 		}
 
-		//todo:delmin 没有删成功
-		for (int index = 0; index < length - TopCount; index++)
+		cout << "\n\intput:------------------------ \n";
+
+		for (int index = 0; index <= length; index++)
 		{
-			delMin();
+			int curValue = p[index];
+			cout << curValue << " ";
 		}
+
+		//todo:效果还是不对
+
+		delMin();
+//		delMax();
 
 		cout << "\n\nmax:------------------------ \n";
 
-		for (int index = 0; index < length; index++)
+		for (int index = 0; index <= length; index++)
 		{
 			int curValue = p[index];
 			cout << curValue << " ";
@@ -74,17 +76,25 @@ protected:
 	int delMax()
 	{
 		int max = p[1];
+
 		exch(p,1, arrayLength--);
-		p[arrayLength + 1] = NULL;
+
+		p[arrayLength+1] = NULL;
+
 		sink(p, arrayLength,1);
+
 		return max;
 	}
 
 	int delMin()
 	{
-		int min = p[arrayLength--]; 
-		p[arrayLength + 1] = NULL;
+		int min = p[1];
+		arrayLength -= 1;
+
+		p[1] = NULL;
+
 		swim(p, arrayLength);
+
 		return min;
 	}
 
@@ -125,7 +135,7 @@ private:
 			{
 				j++;
 			}
-			if (!less(k, j))
+			if (!less(a[k], a[j]))
 			{
 				break;
 			}
